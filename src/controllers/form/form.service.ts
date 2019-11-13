@@ -20,9 +20,8 @@ export class SampleServices {
         subject: body.subject,
         message: body.message,
       }
-      console.log(body.promoCode, body.birthday);
-      if (body.promoCode === undefined && body.birthday === undefined) {
-        console.log("trap");
+
+      if (body.promoCode === undefined || body.promoCode.length === 0) {
         const companyForm = await this.model.create(partialForm);
         return {status:200, message: "Form Added Succesfully", data: companyForm, meta: {}};
       }
@@ -36,11 +35,21 @@ export class SampleServices {
 
     try {
       const list = await this.model.find();
-      return {status: 200, message: "get List of Inguiries Successful", data: list, meta: {}}
+      return {status: 200, message: "get List of Inquiries Successful", data: list, meta: {}}
     } catch (error) {
       return { status: 404, message: error.errmsg ? error.errmsg : error.toString(), data: [], meta: {}}
     }
 
+  }
+
+  async getInquiriesById(id: string) {
+    try {
+
+      const idList = await this.model.findById(id);
+      return {status: 200, message: "find by id successful", data: idList, meta: {}}
+    } catch (error) {
+      return { status: 404, message: error.errmsg ? error.errmsg : error.toString(), data: [], meta: {}}
+    }
   }
 
 }

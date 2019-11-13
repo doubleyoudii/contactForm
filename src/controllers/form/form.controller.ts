@@ -34,8 +34,15 @@ export class FormController {
 
 
   @Get({path: "/admin/inquiries", middlewares: []})
-  async get(req: Request, res: Response, next: NextFunction) {
+  async getInq(req: Request, res: Response, next: NextFunction) {
     const inquiryLists = await this.services.getInquiries();
     res.json(inquiryLists);
+  }
+
+  @Get({path: "/admin/inquiries/:id", middlewares: []})
+  async getInqId(req: Request, res: Response, next: NextFunction) {
+    let id = req.params.id;
+    const specificInq = await this.services.getInquiriesById(id);
+    res.json(specificInq);
   }
 }
