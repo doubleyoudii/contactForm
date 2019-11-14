@@ -9,7 +9,7 @@ config();
   logs: process.env.NODE_ENV, // Default false
   database: Mongo({
     connectionString: process.env.MONGO_CONNECTION_URL || "your-connection-string-here",
-    options: { useCreateIndex: true, useNewUrlParser: true, useFindAndModify: false },
+    options: { useCreateIndex: true, useNewUrlParser: true, useFindAndModify: false , useUnifiedTopology: true},
   }),
   port: Number(process.env.PORT), // Default port:3333
   routes,

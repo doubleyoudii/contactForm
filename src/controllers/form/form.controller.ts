@@ -3,6 +3,7 @@ import { Request, Response, NextFunction } from "express";
 import { SampleServices } from "./form.service";
 import { Check } from "@mayajs/common";
 
+const verify = require("../../middleware/verifyJWT");
 
 @Controller({
   model: "./form.model",
@@ -33,16 +34,37 @@ export class FormController {
   }
 
 
-  @Get({path: "/admin/inquiries", middlewares: []})
+  @Get({path: "/admin/inquiries", middlewares: [
+    verify
+  ]})
   async getInq(req: Request, res: Response, next: NextFunction) {
+
+
     const inquiryLists = await this.services.getInquiries();
     res.json(inquiryLists);
   }
 
-  @Get({path: "/admin/inquiries/:id", middlewares: []})
+  @Get({path: "/admin/inquiries/:id", middlewares: [
+    verify
+  ]})
   async getInqId(req: Request, res: Response, next: NextFunction) {
     let id = req.params.id;
     const specificInq = await this.services.getInquiriesById(id);
     res.json(specificInq);
   }
 }
+
+
+//Abang for JWT
+// jwt.verify(req.body.token, "testSecret", (err: any, authData:any) => {
+//   if (err) {
+//     res.status(403).json({
+//       message: "Forbidden"
+//     })
+//   } else {
+//     res.json({
+//       message: 'Post Created',
+//       authData
+//     })
+//   }
+// })
