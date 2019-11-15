@@ -4,6 +4,7 @@ import { SampleServices } from "./form.service";
 import { Check } from "@mayajs/common";
 
 const verify = require("../../middleware/verifyJWT");
+import jwt from 'jsonwebtoken';
 
 @Controller({
   model: "./form.model",
@@ -39,18 +40,46 @@ export class FormController {
   ]})
   async getInq(req: Request, res: Response, next: NextFunction) {
 
+    jwt.verify(req.body.token, "testSecret", async (err: any, authData:any) => {
+      if (err) {
+        res.status(403).json({
+          message: "Forbidden"
+        })
+      } else {
+        const inquiryLists = await this.services.getInquiries();
+        // res.json(inquiryLists);
+        res.json({
+          message: 'Post Created',
+          authData,
+          inquiryLists
+        })
+      }
+    })
 
-    const inquiryLists = await this.services.getInquiries();
-    res.json(inquiryLists);
   }
 
   @Get({path: "/admin/inquiries/:id", middlewares: [
     verify
   ]})
   async getInqId(req: Request, res: Response, next: NextFunction) {
-    let id = req.params.id;
-    const specificInq = await this.services.getInquiriesById(id);
-    res.json(specificInq);
+
+    jwt.verify(req.body.token, "testSecret", async (err: any, authData:any) => {
+      if (err) {
+        res.status(403).json({
+          message: "Forbidden"
+        })
+      } else {
+        let id = req.params.id;
+        const specificInq = await this.services.getInquiriesById(id);
+        // res.json(specificInq);
+        res.json({
+          message: 'Post Created',
+          authData,
+          specificInq
+        })
+      }
+    })
+
   }
 }
 
