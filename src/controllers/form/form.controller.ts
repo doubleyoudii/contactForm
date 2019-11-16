@@ -40,21 +40,8 @@ export class FormController {
   ]})
   async getInq(req: Request, res: Response, next: NextFunction) {
 
-    jwt.verify(req.body.token, "testSecret", async (err: any, authData:any) => {
-      if (err) {
-        res.status(403).json({
-          message: "Forbidden"
-        })
-      } else {
-        const inquiryLists = await this.services.getInquiries();
-        // res.json(inquiryLists);
-        res.json({
-          message: 'Post Created',
-          authData,
-          inquiryLists
-        })
-      }
-    })
+    const inquiryLists = await this.services.getInquiries();
+    res.json(inquiryLists.data);
 
   }
 
@@ -63,37 +50,11 @@ export class FormController {
   ]})
   async getInqId(req: Request, res: Response, next: NextFunction) {
 
-    jwt.verify(req.body.token, "testSecret", async (err: any, authData:any) => {
-      if (err) {
-        res.status(403).json({
-          message: "Forbidden"
-        })
-      } else {
-        let id = req.params.id;
-        const specificInq = await this.services.getInquiriesById(id);
-        // res.json(specificInq);
-        res.json({
-          message: 'Post Created',
-          authData,
-          specificInq
-        })
-      }
-    })
+    let id = req.params.id;
+    const specificInq = await this.services.getInquiriesById(id);
+
+    res.json(specificInq.data);
 
   }
 }
 
-
-//Abang for JWT
-// jwt.verify(req.body.token, "testSecret", (err: any, authData:any) => {
-//   if (err) {
-//     res.status(403).json({
-//       message: "Forbidden"
-//     })
-//   } else {
-//     res.json({
-//       message: 'Post Created',
-//       authData
-//     })
-//   }
-// })

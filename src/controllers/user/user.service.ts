@@ -1,13 +1,16 @@
 import { Injectable } from "@mayajs/core";
 import { Models } from "@mayajs/mongo";
+import { CompanyServices } from "../company/company.service";
 
 @Injectable()
 export class SampleServices {
   @Models("user") model: any;
+  constructor(private services: CompanyServices) {}
 
   getUser() {
     // Your logic here
     console.log(this.model);
+   
     console.log("This is from UserServices.");
     return {"this is from services": "nothing"}
   }
