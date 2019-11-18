@@ -5,6 +5,7 @@ import { Check } from "@mayajs/common";
 
 const verify = require("../../middleware/verifyJWT");
 import jwt from 'jsonwebtoken';
+import { resolveSoa } from "dns";
 
 @Controller({
   model: "./form.model",
@@ -53,7 +54,7 @@ export class FormController {
     let id = req.params.id;
     const specificInq = await this.services.getInquiriesById(id);
 
-    res.json(specificInq.data);
+    res.status(specificInq.status).json(specificInq.data);
 
   }
 }

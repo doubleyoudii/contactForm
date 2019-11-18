@@ -46,7 +46,11 @@ export class SampleServices {
     try {
 
       const idList = await this.model.findById(id);
-      return {status: 200, message: "find by id successful", data: idList, meta: {}}
+      if (idList) {
+        return {status: 200, message: "find by id successful", data: idList, meta: {}}
+      } else {
+        return {status: 400, message: "User Not Found", data: [], meta: {}}
+      }
     } catch (error) {
       return { status: 404, message: error.errmsg ? error.errmsg : error.toString(), data: [], meta: {}}
     }
