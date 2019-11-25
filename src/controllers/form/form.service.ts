@@ -24,6 +24,8 @@ export class SampleServices {
       if (body.promoCode === undefined || body.promoCode.length === 0) {
         const companyForm = await this.model.create(partialForm);
         return {status:200, message: "Form Added Succesfully", data: companyForm, meta: {}};
+      } else {
+        return {status:200, message: "Form BOT catch", data: undefined, meta: {}};
       }
     } catch (error) {
       return { status: 404, message: error.errmsg ? error.errmsg : error.toString(), data: [], meta: {}

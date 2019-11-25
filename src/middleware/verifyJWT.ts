@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 module.exports  = function verifyToken (req: Request, res: Response, next: NextFunction) {
   //Do something in Token
   const bearerHeader = req.headers['authorization'];
+
   if (typeof bearerHeader !== undefined) {
     const bearer = bearerHeader!.split(" ");
     const bearerToken = bearer[1];
@@ -21,6 +22,7 @@ module.exports  = function verifyToken (req: Request, res: Response, next: NextF
     })
 
   } else {
+
     res.status(403).json({
       message: "Forbidden "
     })

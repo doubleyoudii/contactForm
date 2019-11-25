@@ -6,6 +6,9 @@ const schema = new Schema({
     required: true,
     type: String
   },
+  img: { data: Buffer, contentType: String },
+  quotes: {required: true, type: String}
+
   
 });
 
