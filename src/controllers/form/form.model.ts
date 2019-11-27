@@ -21,7 +21,7 @@ const schema = new Schema({
   },
   contactNo: {
     required: true,
-    type: String
+    type: Number
   },
   subject: {
     required: true,
