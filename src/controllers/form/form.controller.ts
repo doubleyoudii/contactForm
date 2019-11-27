@@ -19,7 +19,7 @@ export class FormController {
  
 
   // This is a POST request equal to "/sample/:id/:name"
-  @Post({ path: "/:clientId", middlewares: [
+  @Post({ path: "/", middlewares: [
     Check("fullName").required(),
     Check("emailAddress").required().isEmail(),
     Check("company").required(),

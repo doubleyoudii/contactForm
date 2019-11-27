@@ -3,7 +3,6 @@ import paginate from "mongoose-paginate";
 
 const schema = new Schema({
   clientId: {
-    required: true,
     type: String
   },
   fullName: {
