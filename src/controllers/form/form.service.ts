@@ -28,7 +28,7 @@ export class SampleServices {
         return {status:200, message: "Form BOT catch", data: undefined, meta: {}};
       }
     } catch (error) {
-      return { status: 404, message: error.errmsg ? error.errmsg : error.toString(), data: [], meta: {}
+      return { status: 404, message: error.errmsg ? error.errmsg : error.toString(), data: undefined, meta: {}
       }
     }
   }

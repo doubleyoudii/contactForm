@@ -29,7 +29,6 @@ export class FormController {
     
   ] })
   async post(req: Request, res: Response, next: NextFunction) {
-    // Do some POST stuff here
     
     const newForm : any = await this.services.postForm(req.body);
     console.log(newForm);
@@ -86,6 +85,8 @@ export class FormController {
   }
 
 
+
+  //Features to be Added
   @Get({path: "/admin/inquiries", middlewares: [
     verify
   ]})
